@@ -1,0 +1,8 @@
+[Unit]
+Description=Set PiJuice WakeUp on start
+
+[Service]
+ExecStart=/usr/bin/python3 /home/theorb/car-misc/set-wakeup-on-charge.py
+
+[Install]
+WantedBy=multi-user.target
