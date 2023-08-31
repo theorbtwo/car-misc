@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+# -*- cperl -*-
+use strictures 2;
+
+my $out;
+
+for (`ip --oneline addr`) {
+  chomp;
+  print "$_\n";
+
+  my ($n, $iface, $fam, $address, $bits) = m!(\d+): \s+ (\S+) \s+ (inet) \s+ ([0-9.]+)!x;
+  
+  next unless defined $n;
+  next if $address eq '127.0.0.1';
+  
+  $out .= "$n: $iface $fam $address\n";
+}
+
+$out = "```$out```";
+
+system("/home/theorb/car-misc/script/telegram_notify.pl", $out)

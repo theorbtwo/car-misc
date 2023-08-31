@@ -3,8 +3,12 @@
 use strict;
 use warnings;
 use feature 'say';
-
+use local::lib '/home/theorb/car-misc/local';
 #use Getopt::Long;
+
+BEGIN {
+    $ENV{BOT_HOME} ||= '/home/theorb/car-misc';
+}
 
 use lib "$ENV{BOT_HOME}/lib";
 use CarPi::TelegramBot;
@@ -23,4 +27,4 @@ $bot->sendMessage({
     chat_id => $bot->mainconfig->{'Telegram::Bot'}{'car_chat_id'},
     text => $message
 });
-$bot->think();
+# $bot->think();
